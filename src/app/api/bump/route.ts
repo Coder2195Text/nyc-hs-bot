@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
 	];
 	for (const idd of ids) {
 		await fetch(
-			`https://discord.com/api/v9/channels/892924468102565958/directory-entry/${idd}`,
+			`https://discord.com/api/v9/channels/892924500117708810/directory-entry/${idd}`,
 			{
 				headers: {
 					authorization: process.env.ANOTHER_BOT_TOKEN!,
@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
 		);
 
 		await fetch(
-			`https://discord.com/api/v9/channels/892924468102565958/directory-entry/${idd}`,
+			`https://discord.com/api/v9/channels/892924500117708810/directory-entry/${idd}`,
 			{
 				headers: {
 					authorization: process.env.ANOTHER_BOT_TOKEN!,
