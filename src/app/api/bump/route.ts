@@ -18,6 +18,27 @@ export async function GET(req: NextRequest) {
 		"1219404921934315613",
 		"1289941201134292992",
 	];
+
+	const results: {
+		guild: { id: string };
+		created_at: string;
+	}[] = await fetch(
+		"https://discord.com/api/v9/channels/892924500117708810/directory-entries",
+		{
+			headers: {
+				authorization: process.env.ANOTHER_BOT_TOKEN!,
+				"content-type": "application/json",
+			},
+		}
+	).then((res) => res.json());
+
+	results.sort((a, b) => {
+		return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+	});
+
+	if (ids.includes(results[0].guild.id))
+		return NextResponse.json({ success: "no bumped" }, { status: 200 });
+
 	for (const idd of ids) {
 		await fetch(
 			`https://discord.com/api/v9/channels/892924500117708810/directory-entry/${idd}`,
@@ -28,7 +49,9 @@ export async function GET(req: NextRequest) {
 				body: null,
 				method: "DELETE",
 			}
-		);
+		).catch(() => {
+			console.log("ignore");
+		});
 
 		await fetch(
 			`https://discord.com/api/v9/channels/892924500117708810/directory-entry/${idd}`,
@@ -39,7 +62,7 @@ export async function GET(req: NextRequest) {
 				},
 				referrer:
 					"https://discord.com/channels/892924467523747893/892924468102565958",
-				body: '{"description":"auto autobump","primary_category_id":1}',
+				body: '{"description":"MAGA guy, go learn to touch grass instead of trying to fight against Democrats. This bumps every 5 minutes.","primary_category_id":1}',
 				method: "POST",
 			}
 		);
