@@ -23,7 +23,7 @@ export async function GET(req: NextRequest) {
 		guild: { id: string };
 		created_at: string;
 	}[] = await fetch(
-		"https://discord.com/api/v9/channels/892924500117708810/directory-entries",
+		"https://discord.com/api/v9/channels/892924467523747893/directory-entries",
 		{
 			headers: {
 				authorization: process.env.ANOTHER_BOT_TOKEN!,
@@ -41,7 +41,7 @@ export async function GET(req: NextRequest) {
 
 	for (const idd of ids) {
 		await fetch(
-			`https://discord.com/api/v9/channels/892924500117708810/directory-entry/${idd}`,
+			`https://discord.com/api/v9/channels/892924467523747893/directory-entry/${idd}`,
 			{
 				headers: {
 					authorization: process.env.ANOTHER_BOT_TOKEN!,
@@ -54,7 +54,7 @@ export async function GET(req: NextRequest) {
 		});
 
 		await fetch(
-			`https://discord.com/api/v9/channels/892924500117708810/directory-entry/${idd}`,
+			`https://discord.com/api/v9/channels/892924467523747893/directory-entry/${idd}`,
 			{
 				headers: {
 					authorization: process.env.ANOTHER_BOT_TOKEN!,
@@ -62,7 +62,7 @@ export async function GET(req: NextRequest) {
 				},
 				referrer:
 					"https://discord.com/channels/892924467523747893/892924468102565958",
-				body: '{"description":"MAGA guy, go learn to touch grass instead of trying to fight against Democrats. This bumps every 5 minutes.","primary_category_id":1}',
+				body: '{"description":"autobumped","primary_category_id":1}',
 				method: "POST",
 			}
 		);
